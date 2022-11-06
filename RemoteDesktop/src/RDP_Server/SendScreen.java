@@ -3,10 +3,13 @@ package RDP_Server;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class SendScreen extends Thread{
@@ -14,6 +17,7 @@ public class SendScreen extends Thread{
 	Robot robot;
 	Rectangle rectangle;
 	DataOutputStream dos;
+	ByteArrayOutputStream baos= new ByteArrayOutputStream();
 	boolean continuedloop = true;
 	public SendScreen(Robot r, Rectangle rect, Socket s){
 		this.robot=r;
@@ -27,6 +31,7 @@ public class SendScreen extends Thread{
 		try {
 			oss = new ObjectOutputStream(soc.getOutputStream());
 			oss.writeObject(rectangle);
+			dos= new DataOutputStream(soc.getOutputStream());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -36,15 +41,16 @@ public class SendScreen extends Thread{
 		while(continuedloop) {
 			try {
 				image= robot.createScreenCapture(rectangle);
-				ImageIcon imgicon = new ImageIcon(image);
 				try {
-					oss.writeObject(imgicon);
+					ImageIO.write(image, "jpg", baos);
+					dos.write(baos.toByteArray());
+					baos.reset();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-				Thread.sleep(100);
+				Thread.sleep(10);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
