@@ -10,7 +10,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 public class SendScreen extends Thread{
 	Socket soc;

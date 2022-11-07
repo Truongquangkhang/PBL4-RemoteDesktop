@@ -1,0 +1,129 @@
+package RDP_Server;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.Inet4Address;
+import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Enumeration;
+import java.util.Vector;
+
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
+import Model.IPv4;
+
+public class test {
+
+	private JFrame frame;
+	private JTextField textField;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					test window = new test();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public test() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 838, 501);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Remote Desktop Control");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(216, 10, 279, 42);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JComboBox comboBox = new JComboBox(TEST1());
+		comboBox.setBounds(395, 99, 279, 31);
+		frame.getContentPane().add(comboBox);
+		comboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(e.getSource().toString());
+				
+			}
+		});
+		
+		textField = new JTextField();
+		textField.setBounds(395, 189, 279, 31);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		try {
+			textField.setText(InetAddress.getLocalHost().toString());
+			
+			lblNewLabel_1 = new JLabel("Host Name");
+			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblNewLabel_1.setBounds(99, 94, 89, 36);
+			frame.getContentPane().add(lblNewLabel_1);
+			
+			lblNewLabel_2 = new JLabel("IPv4");
+			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
+			lblNewLabel_2.setBounds(99, 187, 69, 33);
+			frame.getContentPane().add(lblNewLabel_2);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static Vector<IPv4> TEST1() {
+		Vector<IPv4> listHost = new Vector<IPv4>();
+		try {
+		    Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+		    while (interfaces.hasMoreElements()) {
+		        NetworkInterface iface = interfaces.nextElement();
+		        // filters out 127.0.0.1 and inactive interfaces
+		        if (iface.isLoopback() || !iface.isUp())
+		            continue;
+
+		        Enumeration<InetAddress> addresses = iface.getInetAddresses();
+		        while(addresses.hasMoreElements()) {
+		            InetAddress addr = addresses.nextElement();
+		            IPv4 temp = new IPv4();
+		            // *EDIT*
+		            if (addr instanceof Inet6Address) continue;
+		            temp.setHostName(iface.getDisplayName());
+		            temp.setIPV4(addr.getHostAddress());
+		            listHost.add(temp);
+		        }
+		    }
+		    return listHost;
+		} catch (SocketException e) {
+		    throw new RuntimeException(e);
+		}
+		
+	}
+}
+

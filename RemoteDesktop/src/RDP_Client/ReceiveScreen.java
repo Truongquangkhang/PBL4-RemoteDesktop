@@ -2,16 +2,12 @@ package RDP_Client;
 
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.Socket;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class ReceiveScreen extends Thread {
