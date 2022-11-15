@@ -53,9 +53,10 @@ public class CreateFrame extends Thread {
 			}
 			new ReceiveScreen(soc, panel);
 			new SendEvent(soc, panel, rect.getWidth(), rect.getHeight());
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("HELLO 1");
 		}
 
 	}
