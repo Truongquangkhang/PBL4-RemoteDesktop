@@ -1,6 +1,5 @@
 package RDP_Server;
 
-import java.io.IOException;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -19,35 +18,38 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StartServer {
+	Vector<Client> listClient = new Vector<Client>();
 
-	Vector<ThreadClient> listClient = new Vector<ThreadClient>();
-	private Socket socket;
+	public static void main(String[] args) {
+		GUI();
+		new StartServer();
+
+	}
 
 	public StartServer() {
+		ServerSocket serversoc;
 		try {
-			try (ServerSocket server = new ServerSocket(2048)) {
-				socket = server.accept();
+			serversoc = new ServerSocket(2048);
+			while (true) {
+				
+				Socket socket = serversoc.accept();
+//				boolean busy = false;
+//				for (int i = 0; i < listClient.size(); i++) {
+//					if (!listClient.get(i).socket.isClosed()) {
+//						busy = true;
+//						break;
+//					}
+//				}
+//				if (busy == true)
+//					continue;
+				Client client = new Client(socket, this);
+				Tool.displayTray("Connected", socket.getInetAddress().getHostAddress() + " is connected");
+				listClient.add(client);
+				client.start();
 			}
-			GraphicsEnvironment gpre = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			GraphicsDevice gprd = gpre.getDefaultScreenDevice();
-			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-			String wight = "" + dim.width;
-			String height = "" + dim.height;
-			Rectangle rect = new Rectangle(dim);
-			System.out.println(wight + " " + height);
-			try {
-				Robot robot = new Robot(gprd);
 
-				new SendScreen(robot, rect, socket);
-				new ReceiveEvent(socket, robot);
-			} catch (AWTException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		} catch (Exception e) {
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
@@ -120,11 +122,31 @@ public class StartServer {
 		}
 
 	}
+}
 
-	public static void main(String[] args) {
-		GUI();
-		new StartServer();
+class Client extends Thread {
+	public Socket socket;
+	public StartServer server;
 
+	public Client(Socket soc, StartServer server) {
+		this.socket = soc;
+		this.server = server;
+	}
+
+	public void run() {
+		GraphicsEnvironment gpre = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice gprd = gpre.getDefaultScreenDevice();
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		Rectangle rect = new Rectangle(dim);
+		try {
+			Robot robot = new Robot(gprd);
+
+			new SendScreen(robot, rect, socket);
+			new ReceiveEvent(socket, robot);
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

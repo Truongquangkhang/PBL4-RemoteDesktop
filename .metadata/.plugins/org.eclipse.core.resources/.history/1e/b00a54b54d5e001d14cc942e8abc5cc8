@@ -1,6 +1,0 @@
-package Model;
-
-public class IP {
-	private String HostName;
-	private String IPV4;
-}

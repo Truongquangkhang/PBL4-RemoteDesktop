@@ -18,7 +18,7 @@ public class ReceiveEvent extends Thread{
 		try {
 			scanner = new Scanner(soc.getInputStream());
 			
-			while(true) {
+			while(!soc.isClosed()) {
 				switch (scanner.nextInt()) {
 				//Mouse move
 				case -1:	
@@ -57,9 +57,15 @@ public class ReceiveEvent extends Thread{
 					break;
 				}
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			try {
+				soc.close();
+				scanner.close();
+				return;
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 	}
