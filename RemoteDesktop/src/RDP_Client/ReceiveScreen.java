@@ -26,6 +26,7 @@ public class ReceiveScreen extends Thread {
 	public void run() {
 		BufferedImage image;
 		ByteArrayInputStream bais;
+		Graphics g = panel.getGraphics();
 		try {
 			dis = new DataInputStream(soc.getInputStream());
 			while (soc.isConnected()) {
@@ -36,7 +37,8 @@ public class ReceiveScreen extends Thread {
 					try {
 					count += dis.read(bytes, count, bytes.length - count);
 					}catch (Exception e) {
-						JOptionPane.showMessageDialog(null, "enter fields please", "ERROR", JOptionPane.ERROR_MESSAGE);
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "EROR", "ERROR", JOptionPane.ERROR_MESSAGE);
 						panel.setVisible(false);
 						soc.close();
 						return;
@@ -45,13 +47,11 @@ public class ReceiveScreen extends Thread {
 				bais = new ByteArrayInputStream(bytes);
 				image = ImageIO.read(bais);
 				bais.reset();
-				// Image ig = image.getScaledInstance(panel.getWidth(), panel.getHeight(),
-				// Image.SCALE_REPLICATE);
-				Graphics g = panel.getGraphics();
 				g.drawImage(image, 0, 0, panel.getWidth(), panel.getHeight(), panel);
 			}
 		} catch (Exception e1) {
 			try {
+				e1.printStackTrace();
 				soc.close();
 				dis.close();
 			} catch (IOException e) {

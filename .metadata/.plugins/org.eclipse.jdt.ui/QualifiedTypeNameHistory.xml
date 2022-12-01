@@ -2,9 +2,7 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="java.io.DataOutputStream"/>
     <fullyQualifiedTypeName name="java.io.ByteArrayOutputStream"/>
-    <fullyQualifiedTypeName name="java.net.Socket"/>
     <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
-    <fullyQualifiedTypeName name="java.io.DataInputStream"/>
     <fullyQualifiedTypeName name="java.io.ByteArrayInputStream"/>
     <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
     <fullyQualifiedTypeName name="java.awt.geom.IllegalPathStateException"/>
@@ -18,6 +16,19 @@
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
     <fullyQualifiedTypeName name="Model.IPv4"/>
-    <fullyQualifiedTypeName name="java.awt.Image"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="java.awt.AWTException"/>
+    <fullyQualifiedTypeName name="java.awt.SystemTray"/>
+    <fullyQualifiedTypeName name="java.awt.Image"/>
+    <fullyQualifiedTypeName name="java.awt.Toolkit"/>
+    <fullyQualifiedTypeName name="java.awt.TrayIcon"/>
+    <fullyQualifiedTypeName name="java.awt.TrayIcon.MessageType"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="RDP_Server.StartServer"/>
+    <fullyQualifiedTypeName name="java.net.Socket"/>
+    <fullyQualifiedTypeName name="java.net.ServerSocket"/>
+    <fullyQualifiedTypeName name="RDP_Server.Client"/>
+    <fullyQualifiedTypeName name="RDP_Server.Tool"/>
+    <fullyQualifiedTypeName name="java.io.DataInputStream"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>

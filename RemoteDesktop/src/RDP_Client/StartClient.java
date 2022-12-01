@@ -51,7 +51,7 @@ public class StartClient implements ActionListener{
 
 	public static void main(String[] args) {
 		new StartClient();
-		System.out.println("Done");
+		
 	}
 
 	@Override
@@ -66,13 +66,9 @@ public class StartClient implements ActionListener{
 					soc = new Socket(IP, 2048);
 					new CreateFrame(soc, "100","100");
 
-				} catch (UnknownHostException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "something wrong, try again", "ERROR", JOptionPane.ERROR_MESSAGE);
+				} 
 			} else {
 				JOptionPane.showMessageDialog(null, "enter fields please", "ERROR", JOptionPane.ERROR_MESSAGE);
 			}

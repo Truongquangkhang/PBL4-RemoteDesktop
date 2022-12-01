@@ -33,17 +33,8 @@ public class StartServer {
 			while (true) {
 				
 				Socket socket = serversoc.accept();
-//				boolean busy = false;
-//				for (int i = 0; i < listClient.size(); i++) {
-//					if (!listClient.get(i).socket.isClosed()) {
-//						busy = true;
-//						break;
-//					}
-//				}
-//				if (busy == true)
-//					continue;
 				Client client = new Client(socket, this);
-				Tool.displayTray("Connected", socket.getInetAddress().getHostAddress() + " is connected");
+				Tool.displayTray("Connected", "");
 				listClient.add(client);
 				client.start();
 			}
@@ -123,6 +114,7 @@ public class StartServer {
 
 	}
 }
+
 
 class Client extends Thread {
 	public Socket socket;

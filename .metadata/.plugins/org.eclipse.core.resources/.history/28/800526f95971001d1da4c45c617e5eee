@@ -1,0 +1,16 @@
+package RDP_Server;
+
+import java.net.InetAddress;
+
+public class NetworkTest {
+  public static void main(String args[]){
+	try {
+	    InetAddress[] hostAddresses = InetAddress.getAllByName("godaddy.com");
+            for(InetAddress host:hostAddresses){
+                System.out.println(host.getHostAddress());
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+  }
+}

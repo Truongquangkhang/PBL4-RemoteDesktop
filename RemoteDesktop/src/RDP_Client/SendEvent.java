@@ -14,7 +14,7 @@ import java.net.Socket;
 
 import javax.swing.JPanel;
 
-public class SendEvent implements MouseListener, MouseMotionListener, MouseWheelListener,KeyListener {
+public class SendEvent implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
 	public boolean dragg;
 	DataOutputStream dos;
 	Socket soc;
@@ -35,7 +35,7 @@ public class SendEvent implements MouseListener, MouseMotionListener, MouseWheel
 		this.panel.addKeyListener(this);
 		this.panel.setFocusable(true);
 		this.panel.requestFocusInWindow();
-		
+
 		try {
 			writer = new PrintWriter(soc.getOutputStream());
 		} catch (IOException e) {
@@ -87,18 +87,18 @@ public class SendEvent implements MouseListener, MouseMotionListener, MouseWheel
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(!dragg) {
+		if (!dragg) {
 			writer.println(Commands.MOUSE_LEFTDOWN.value);
 			writer.flush();
-			dragg=true;
-		}else {
+			dragg = true;
+		} else {
 			double Xscale = this.W / panel.getWidth();
 			double Yscale = this.H / panel.getHeight();
 			writer.println(Commands.MOUSE_MOVE.value);
 			writer.println((int) (Xscale * e.getX()));
 			writer.println((int) (Yscale * e.getY()));
 			writer.flush();
-			dragg=true;
+			dragg = true;
 		}
 	}
 
@@ -112,6 +112,7 @@ public class SendEvent implements MouseListener, MouseMotionListener, MouseWheel
 		writer.flush();
 
 	}
+
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		// TODO Auto-generated method stub
@@ -124,25 +125,31 @@ public class SendEvent implements MouseListener, MouseMotionListener, MouseWheel
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
-		writer.println(Commands.KEY_DOWN.value);
-		writer.println(e.getKeyCode());
-		writer.flush();
+
+		if (e.getKeyCode() != 0) {
+			writer.println(Commands.KEY_DOWN.value);
+			System.out.println(e.getKeyCode());
+			writer.println(e.getKeyCode());
+			writer.flush();
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
-		writer.println(Commands.KEY_UP.value);
-		writer.println(e.getKeyCode());
-		writer.flush();
+
+		if (e.getKeyCode() != 0) {
+			writer.println(Commands.KEY_UP.value);
+			System.out.println(e.getKeyCode());
+			writer.println(e.getKeyCode());
+			writer.flush();
+		}
 	}
 
 }
