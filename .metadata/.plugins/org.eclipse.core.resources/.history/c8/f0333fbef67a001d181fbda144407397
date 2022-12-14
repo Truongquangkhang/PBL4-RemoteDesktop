@@ -1,7 +1,6 @@
 package RDP_Client;
 
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
@@ -26,27 +25,23 @@ public class StartClient implements ActionListener{
 	DataInputStream dis;
 	public void GUI() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 735, 437);
+		frame.setBounds(100, 100, 881, 497);
 		frame.setDefaultCloseOperation(3);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel1 = new JLabel("Remote Desktop Control");
-		lblNewLabel1.setFont(new Font("Tekton", Font.BOLD, 24));
-		lblNewLabel1.setBounds(213, 34, 277, 43);
-		frame.getContentPane().add(lblNewLabel1);
 		
 		tfipaddress = new JTextField();
-		tfipaddress.setBounds(286, 133, 345, 29);
+		tfipaddress.setBounds(332, 111, 285, 28);
 		frame.getContentPane().add(tfipaddress);
 		tfipaddress.setColumns(10);
 		
 
 		JLabel lblNewLabel = new JLabel("IP ADDRESS");
-		lblNewLabel.setBounds(111, 124, 108, 43);
+		lblNewLabel.setBounds(116, 110, 74, 28);
 		frame.getContentPane().add(lblNewLabel);
 
 		btnsubmit = new JButton("Connect");
-		btnsubmit.setBounds(286, 282, 102, 37);
+		btnsubmit.setBounds(310, 341, 112, 34);
 		frame.getContentPane().add(btnsubmit);
 		btnsubmit.addActionListener(this);
 		

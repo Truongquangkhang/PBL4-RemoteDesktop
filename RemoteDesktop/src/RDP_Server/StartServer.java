@@ -51,7 +51,7 @@ public class StartServer {
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Remote Desktop Control");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setFont(new Font("Tekton", Font.BOLD, 24));
 		lblNewLabel.setBounds(216, 10, 279, 42);
 		frame.getContentPane().add(lblNewLabel);
 

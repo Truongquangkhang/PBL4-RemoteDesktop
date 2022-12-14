@@ -10,4 +10,6 @@
 			<item value="org.eclipse.wb/org.eclipse.wb.rcp/org.eclipse.wb.rcp.swt"/>
 		</list>
 	</section>
+	<section name="ImportExportAction">
+	</section>
 </section>
